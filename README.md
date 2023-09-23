@@ -9,4 +9,4 @@ Tematica del TPE:
 Pagina de Futbol Argentino.
 
 Breve Descripcion:
-vamos a mostrar la informacion y caracteristicas de los jugadores y clubes del futbol argentino.
+Vamos a mostrar la información y características de los jugadores y clubes del fútbol argentino.
