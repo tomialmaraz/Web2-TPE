@@ -1,0 +1,46 @@
+<?php require 'templates/Header.phtml' ?>
+
+<h1 class="display-5 text-center">Jugadores de la Asociación de Fútbol Argentino</h1>
+
+<div class="flexeado">
+  <ul class="separamelosUnToke">
+    <input type='text' placeholder='Buscar jugador'>
+    <li><a href="listarJugadores" class="btn btn-primary">Todos</a></li>
+    <li><a href="club/1" class="btn btn-primary">Boca</a></li>
+    <li> <a href="club/2" class="btn btn-primary">River</a></li>
+    <li> <a href="club/3" class="btn btn-primary">Velez</a></li>
+    <li> <a href="posicion/arquero" class="btn btn-primary">Arqueros</a></li>
+    <li><a href="posicion/Defensor" class="btn btn-primary">Defensores</a></li>
+    <li> <a href="posicion/Mediocampista" class="btn btn-primary">Mediocampistas</a></li>
+    <li><a href="posicion/Delantero" class="btn btn-primary">Delanteros</a></li>
+  </ul>
+  <ul class="list-group" id="list_jugadores">
+    <?php
+    /*
+    var_dump($jugadores);
+    die;
+    */
+    foreach ($jugadores as $jugador) { ?>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-md-6">
+            <h4><?= $jugador->nombre ?></h4>
+            <p>Club: <?= $jugador->nombre_club ?></p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <div class="d-flex justify-content-end align-items-end">
+              <a href="jugador/<?= $jugador->id_jugador ?>" class="btn btn-primary">Ver Detalles</a>
+              <a href="eliminarJugador/<?= $jugador->id_jugador ?>" type="button" class="btn btn-danger ms-2">Eliminar</a>
+            </div>
+          </div>
+        </div>
+      </li>
+    <?php } ?>
+  </ul>
+</div>
+<h3 class="mb-3">Agregar Nuevo Jugador</h3> <!-- Esto no deberia estar en el template FormAgregar? -->
+
+<?php require_once 'templates/FormularioAgregar.phtml';?>
+
+
+<?php require 'templates/Footer.phtml' ?>

@@ -1,0 +1,20 @@
+#list_jugadores {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.list-group-item {
+    padding-bottom: 0px;
+}
+
+.flexeado {
+    display: flex;
+}
+
+li {
+    list-style: none;
+}
+
+.separamelosUnToke li {
+    margin-top: 15px;
+}

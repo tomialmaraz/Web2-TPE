@@ -1,0 +1,24 @@
+<?php require 'templates/Header.phtml' ?>
+
+<div class="mt-5 w-25 mx-auto">
+    <form method="POST" action="auth">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" required class="form-control" id="username" name="username" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" required class="form-control" id="password" name="password">
+        </div>
+
+        <?php if ($error) : ?>
+            <div class='alert alert-danger' role='alert'>
+                <?= $error ?>
+            </div> 
+        <?php endif ?>
+       
+        <button type="submit" class="btn btn-primary mt-3">Acceder</button>
+    </form>
+</div>
+
+<?php require 'templates/Footer.phtml' ?>
