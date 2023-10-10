@@ -1,0 +1,18 @@
+<?php require 'templates/Header.phtml' ?>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title"><?php echo $jugador->nombre ?></h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Edad: <?php echo $jugador->edad ?></li>
+            <li class="list-group-item">Nacionalidad: <?php echo $jugador->nacionalidad ?></li>
+            <li class="list-group-item">Posicion: <?php echo $jugador->posicion ?></li>
+            <li class="list-group-item">Pie Habil: <?php echo $jugador->pie_habil ?></li>
+            <li class="list-group-item">Club: <?php echo $jugador->nombre_club ?></li>
+        </ul>
+    </div>
+</div>
+
+<?php require 'templates/Footer.phtml' ?>

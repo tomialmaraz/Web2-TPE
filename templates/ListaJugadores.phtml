@@ -1,0 +1,27 @@
+<?php require 'templates/Header.phtml' ?>
+
+<h1 class="display-5 text-center">Jugadores de la Asociación de Fútbol Argentino</h1>
+<ul class="list-group" id="list_jugadores">
+  <?php foreach ($jugadores as $jugador) { ?>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-md-6">
+          <h4><?= $jugador->nombre ?></h4>
+          <p>Club: <?= $jugador->nombre_club ?></p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <div class="d-flex justify-content-end align-items-end">
+            <a href="jugador/<?= $jugador->id_jugador ?>" class="btn btn-primary">Ver Detalles</a>
+            <a href="eliminarJugador/<?= $jugador->id_jugador ?>" type="button" class="btn btn-danger ms-2">Eliminar</a>
+          </div>
+        </div>
+      </div>
+    </li>
+  <?php } ?>
+</ul>
+<h3 class="mb-3">Agregar Nuevo Jugador</h3>
+
+<?php require_once 'templates/FormularioAgregar.phtml';?>
+
+
+<?php require 'templates/Footer.phtml' ?>
