@@ -2,14 +2,14 @@
 
 require_once './config.php';
 
-class JugadorModel extends UserModel{
+class JugadorModel {
     private $dataBase;
 
     function __construct(){
         $this->dataBase = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8", DB_USER, DB_PASSWORD);
     }
 
-    function getJugadores(){
+    function getJugadoresClubes(){
         $query = $this->dataBase->prepare('SELECT jugadores.*, clubes.nombre AS nombre_club FROM jugadores INNER JOIN clubes ON jugadores.id_club = clubes.id_club');
         $query->execute();
 
