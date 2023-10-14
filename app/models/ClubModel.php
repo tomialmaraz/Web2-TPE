@@ -25,6 +25,13 @@ class ClubModel {
         return $club;
     }
 
+    function insertClub($nombre, $fecha_creacion, $ubicacion, $estadio, $campeonatos_locales) {
+        $query = $this->dataBase->prepare('INSERT INTO clubes (nombre, fecha_creacion, ubicacion, estadio, campeonatos_locales) VALUES(?,?,?,?,?)');
+        $query->execute([$nombre, $fecha_creacion, $ubicacion, $estadio, $campeonatos_locales]);
+                            // y esta funcion??? supongo que retorna el ultimo id_club que tenga la tabla o el siguente del ultimo? ni idea
+        return $this->dataBase->lastInsertId();
+    }
+
     function borrarClubById($id){
         $query = $this->dataBase->prepare('DELETE FROM clubes WHERE id_club = ?');
         $query->execute([$id]);

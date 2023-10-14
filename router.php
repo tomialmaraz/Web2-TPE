@@ -48,6 +48,10 @@ switch ($params[0]) {
         $controller = new ClubController();
         $controller->showClubById($params[1]);
         break;
+    case 'agregarClub':
+        $controller = new ClubController();
+        $controller->agregarClub();
+        break;
     case 'eliminarClub':
         $controller = new ClubController();
         $controller->eliminarClub($params[1]);
