@@ -25,11 +25,15 @@ class JugadorModel extends UserModel{
         return $jugador;
     }
 
+    function modificarJugador($id,$nombre, $edad, $nacionalidad, $posicion, $pie_habil, $club_id){
+        $query = $this->dataBase->prepare('UPDATE jugadores SET nombre = ?, edad = ?, nacionalidad = ?, posicion = ?, pie_habil = ?, id_club = ? WHERE id_jugador = ?');
+        $query->execute([$nombre, $edad, $nacionalidad, $posicion, $pie_habil, $club_id, $id]);
+        
+    }
+
     function borrarJugador($id){
         $query = $this->dataBase->prepare('DELETE FROM jugadores WHERE id_jugador = ?');
         $query->execute([$id]);
     }
-
-    //ME FALTA FUNCION DE AGREGAR JUGADOR Y FUNCION DE MODIFICAR
 
 }
