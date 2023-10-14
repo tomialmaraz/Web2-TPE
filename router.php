@@ -1,6 +1,7 @@
 <?php
 require_once './app/controllers/AuthController.php';
 require_once './app/controllers/JugadorController.php';
+require_once './app/controllers/ClubController.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -9,16 +10,21 @@ if (!empty( $_GET['action'])) {
     $action = $_GET['action'];
 }
 
-// listar    ->         taskController->showTasks();
-// agregar   ->         taskController->addTask();
-// eliminar/:ID  ->     taskController->removeTask($id); 
-// finalizar/:ID  ->    taskController->finishTask($id);
-// about ->             aboutController->showAbout();
-// login ->             authContoller->showLogin();
-// logout ->            authContoller->logout();
-// auth                 authContoller->auth(); // toma los datos del post y autentica al usuario
+// listarJugadores               ->    JugadorController->showJugadores();
+// verDetalleJugador/id_jugador  ->    JugadorController->showJugadorById($id);
+// editarJugador                 ->    JugadorController->
+// eliminarJugador/id_jugador    ->    JugadorController->eliminarJugador($id);
+// agregarJugador                ->    JugadorController->agregarJugador();
+// listarClubes                  ->    ClubController->showClubes()  
+// verDetalleClub/id_club        ->    ClubController->showClubById($id);
+// editarClub                    ->    ClubController->editarClub();
+// eliminarClub/id_club          ->    ClubController->eliminarClub($id);
+// agregarClub                   ->    ClubController->agregarClub();
+// login                         ->    authContoller->showLogin();
+// logout                        ->    authContoller->logout();
+// auth                          ->    authContoller->auth(); // toma los datos del post y autentica al usuario
 
-// parsea la accion para separar accion real de parametros
+
 $params = explode('/', $action);
 
 switch ($params[0]) {
@@ -45,10 +51,26 @@ switch ($params[0]) {
     case 'eliminarJugador':
         $controller = new JugadorController();
         $controller->eliminarJugador($params[1]);
+        break; 
+    case 'listarClubes':
+        $controller = new ClubController();
+        $controller->showClubes();
+        break;
+    case 'club':
+        $controller = new ClubController();
+        $controller->showClubById($params[1]);
+        break;
+    case 'eliminarClub':
+        $controller = new ClubController();
+        $controller->eliminarClub($params[1]);
         break;
     case 'login':
         $controller = new AuthController();
         $controller->showLogin();
+        break;
+    case 'logout':
+        $controller = new AuthController();
+        $controller->logout();
         break;
     case 'auth':
         $controller = new AuthController();
@@ -58,18 +80,7 @@ switch ($params[0]) {
         $controller = new TaskController();
         $controller->addTask();
         break;
-    case 'finalizar':
-        $controller = new TaskController();
-        $controller->finishTask($params[1]);
-        break;
-    case 'about':
-        $controller = new AboutController();
-        $controller->showAbout();
-        break;*/
-    /* case 'logout':
-        $controller = new AuthController();
-        $controller->logout();
-        break;  */
+        */
     default: 
         echo "404 Page Not Found";
         break;

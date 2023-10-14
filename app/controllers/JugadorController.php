@@ -15,7 +15,7 @@ class JugadorController {
     }
 
     function showJugadores(){
-        $jugadores = $this->model->getJugadores();
+        $jugadores = $this->model->getJugadoresClubes();
         $this->view->showJugadores($jugadores);
     }
 

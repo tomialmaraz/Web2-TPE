@@ -17,6 +17,11 @@ class AuthController {
         $this->view->showLogin();
     }
 
+    public function logout() {
+        AuthHelper::logout();
+        header('Location: ' . BASE_URL);    
+    }
+
     function authenticate(){
         if (!empty($_POST['username']) && !empty($_POST['password'])){
             $username = $_POST['username'];
@@ -28,7 +33,6 @@ class AuthController {
             if($user && password_verify($password, $user->password)){
                 AuthHelper::login($user);
                 header('Location: ' . BASE_URL . '/listarJugadores');
-            
             } 
             else{
                 $this->view->showLogin('Datos incorrectos');
@@ -38,7 +42,4 @@ class AuthController {
             $this->view->showLogin('Campos sin rellenar');
         }
     }
-
-    //FALTA LOGOUT
-
 }

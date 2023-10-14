@@ -14,6 +14,11 @@ class AuthHelper{
         $_SESSION['USER_USERNAME'] = $user->username; 
     }
 
+    public static function logout() {
+        AuthHelper::initialize();
+        session_destroy();
+    }
+    
     public static function verify() {
         AuthHelper::initialize();
         if (!isset($_SESSION['USER_ID'])) {

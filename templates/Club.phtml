@@ -1,0 +1,17 @@
+<?php require 'templates/Header.phtml' ?>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title"><?= $club->nombre ?></h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Fecha de inauguración: <?= $club->fecha_creacion ?></li>
+            <li class="list-group-item">Ubicación Sede: <?= $club->ubicacion ?></li>
+            <li class="list-group-item">Estadio: <?= $club->estadio ?></li>
+            <li class="list-group-item">Campeonatos locales alcanzados: <?= $club->campeonatos_locales ?></li>
+        </ul>
+    </div>
+</div>
+
+<?php require 'templates/Footer.phtml' ?>
