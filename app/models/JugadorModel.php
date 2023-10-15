@@ -25,10 +25,14 @@ class JugadorModel {
         return $jugador;
     }
 
+    function agregarJugar($nombre, $edad, $nacionalidad, $posicion, $pie_habil, $club_id){
+        $query = $this->dataBase->prepare('INSERT INTO jugadores (nombre, edad, nacionalidad, posicion, pie_habil, id_club) VALUES (?,?,?,?,?,?)');
+        $query->execute([$nombre, $edad, $nacionalidad, $posicion, $pie_habil, $club_id]);
+    }
+
     function modificarJugador($id,$nombre, $edad, $nacionalidad, $posicion, $pie_habil, $club_id){
         $query = $this->dataBase->prepare('UPDATE jugadores SET nombre = ?, edad = ?, nacionalidad = ?, posicion = ?, pie_habil = ?, id_club = ? WHERE id_jugador = ?');
         $query->execute([$nombre, $edad, $nacionalidad, $posicion, $pie_habil, $club_id, $id]);
-        
     }
 
     function borrarJugador($id){

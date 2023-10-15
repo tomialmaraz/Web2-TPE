@@ -40,14 +40,14 @@ switch ($params[0]) {
         $controller = new JugadorController();
         $controller->showJugadorAModificar($params[1]);
         break;
+    case 'agregarJugador':
+        $controller = new JugadorController();
+        $controller->agregarJugador();
+        break;
     case 'modificarJugador':
         $controller = new JugadorController();
         $controller->modificarJugador($params[1]);
         break;
-    /* case 'agregarJugador':
-        $controller = new JugadorController();
-        $controller->agregarJugador();
-        break; */
     case 'eliminarJugador':
         $controller = new JugadorController();
         $controller->eliminarJugador($params[1]);

@@ -2,7 +2,7 @@
 
 class JugadorView {
 
-    function showJugadores($jugadores){
+    function showJugadores($jugadores, $clubes){
         require_once './templates/ListaJugadores.phtml';
     }
 

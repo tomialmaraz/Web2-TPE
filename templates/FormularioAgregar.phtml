@@ -26,7 +26,10 @@
   <div class="col-md-2">
     <label for="club" class="form-label">Club</label>
     <select id="club" class="form-select">
-      <option selected>Seleccionar...</option>
+      <option selected disabled>Seleccionar...</option>
+      <?php foreach ($clubes as $club) {?>
+        <option value="<?= $club->id_club ?>"><?= $club->nombre ?></option>
+      <?php } ?>
     </select>
   </div>
   <div class="col-md-2">

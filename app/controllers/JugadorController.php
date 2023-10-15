@@ -1,22 +1,26 @@
 <?php
 require_once './app/models/JugadorModel.php';
 require_once './app/views/JugadorView.php';
+require_once './app/models/ClubModel.php';
 
 class JugadorController {
 
     private $view;
     private $model;
+    private $clubModel;
 
     function __construct() {
         AuthHelper::initialize();
 
         $this->view = new JugadorView();
         $this->model = new JugadorModel();
+        $this->clubModel = new ClubModel();
     }
 
     function showJugadores(){
         $jugadores = $this->model->getJugadoresClubes();
-        $this->view->showJugadores($jugadores);
+        $clubes = $this->clubModel->getClubes();
+        $this->view->showJugadores($jugadores, $clubes);
     }
 
     function showJugadorById($id){
