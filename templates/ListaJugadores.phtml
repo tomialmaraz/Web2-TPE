@@ -12,17 +12,21 @@
         <div class="col-md-6 text-md-end">
           <div class="d-flex justify-content-end align-items-end">
             <a href="jugador/<?= $jugador->id_jugador ?>" class="btn btn-secondary">Ver Detalles</a>
-            <a href="formModificarJugador/<?= $jugador->id_jugador ?>" class="btn btn-primary ms-2">Modificar</a>
-            <a href="eliminarJugador/<?= $jugador->id_jugador ?>" type="button" class="btn btn-danger ms-2">Eliminar</a>
+            <?php if (isset($_SESSION['USER_ID'])) : ?>
+              <a href="formModificarJugador/<?= $jugador->id_jugador ?>" class="btn btn-primary ms-2">Modificar</a>
+              <a href="eliminarJugador/<?= $jugador->id_jugador ?>" type="button" class="btn btn-danger ms-2">Eliminar</a>
+            <?php endif ?>
           </div>
         </div>
       </div>
     </li>
   <?php } ?>
 </ul>
+
+<?php if(isset($_SESSION['USER_ID'])) : ?>
 <h3 class="mb-3">Agregar Nuevo Jugador</h3>
-
-<?php require_once 'templates/FormularioAgregar.phtml';?>
-
-
-<?php require 'templates/Footer.phtml' ?>
+<?php require_once 'templates/FormularioAgregar.phtml';
+else:?>
+<h4 class="mb-3">Para modificar, agregar, o eliminar jugadores, debe estar Logeado</h4>
+<?php require 'templates/Footer.phtml';
+endif ?>  

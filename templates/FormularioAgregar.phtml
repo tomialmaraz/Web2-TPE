@@ -1,23 +1,23 @@
 <form class="row g-3 d-flex justify-content-between align-items-end" method="POST" action="agregarJugador">
   <div class="col-md-2">
     <label for="nombre" class="form-label">Nombre</label>
-    <input type="text" class="form-control" name="nombre">
+    <input type="text" class="form-control" name="nombre" id="nombre">
   </div>
   <div class="col-md-2">
     <label for="nacionalidad" class="form-label">Nacionalidad</label>
-    <input type="text" class="form-control" name="nacionalidad">
+    <input type="text" class="form-control" name="nacionalidad" id="nacionalidad">
   </div>
   <div class="col-md-2">
     <label for="posicion" class="form-label">Posicion</label>
-    <input type="text" class="form-control" name="posicion">
+    <input type="text" class="form-control" name="posicion" id="posicion">
   </div>
   <div class="col-md-2">
     <label for="edad" class="form-label">Edad</label>
-    <input type="number" class="form-control" name="edad">
+    <input type="number" class="form-control" name="edad" id="edad">
   </div>
   <div class="col-md-2">
     <label for="pie_habil" class="form-label">Pie Habil</label>
-    <select name="pie_habil" class="form-select">
+    <select name="pie_habil" class="form-select" id="pie_habil">
       <option selected disabled>Seleccionar...</option>
         <option value="diestro">Diestro</option>
         <option value="zurdo">Zurdo</option>
@@ -25,7 +25,7 @@
   </div>
   <div class="col-md-2">
     <label for="club" class="form-label">Club</label>
-    <select name="id_club" class="form-select">
+    <select name="id_club" id="club" class="form-select">
       <option selected disabled>Seleccionar...</option>
       <?php foreach ($clubes as $club) {?>
         <option value="<?= $club->id_club ?>"><?= $club->nombre ?></option>

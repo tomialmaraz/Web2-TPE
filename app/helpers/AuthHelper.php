@@ -27,6 +27,4 @@ class AuthHelper{
         }
     }
 
-    //FALTA LOGOUT
-
 }
