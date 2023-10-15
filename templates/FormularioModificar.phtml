@@ -34,8 +34,10 @@
     <h3 class="form-label">Club</h3>
     <h4 class="form-select" id="club"><?= $jugador->nombre_club ?></h4>
     <select name="id_club" class="form-select">
-      <option selected>Seleccionar...</option>
-      <option value="2">Derecho</option>
+      <option selected disabled>Seleccionar...</option>
+      <?php foreach ($clubes as $club) {?>
+        <option value="<?= $club->id_club ?>"><?= $club->nombre ?></option>
+      <?php } ?>
     </select>
   </div>
   <div class="col-md-2">

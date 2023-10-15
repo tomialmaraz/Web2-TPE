@@ -10,7 +10,7 @@ class JugadorView {
         require_once './templates/Jugador.phtml';
     }
 
-    function showJugadorAModificar($jugador){
+    function showJugadorAModificar($jugador, $clubes){
         require_once './templates/FormularioModificar.phtml';
     }
 

@@ -2,7 +2,7 @@
 
 class ClubView {
 
-    function showError($msjError) {
+    function showError($error) {
         require_once './templates/Error.phtml';
     }
     function showClubes($clubes){
