@@ -57,7 +57,7 @@ class JugadorController {
 
             $id = $this->model->agregarJugador($nombre, $edad, $nacionalidad, $posicion, $pie_habil, $id_club);
             if ($id) {
-                header('Location: ' . BASE_URL);
+                header('Location: ' . BASE_URL . '/listarJugadores');
             } else {
                 $this->view->showError("Error al insertar jugador");
             }
@@ -82,14 +82,14 @@ class JugadorController {
             $this->view->showMensaje("Se modifico correctamente");
         }
         else{
-            $this->view->showError("Error al Modificar Jugador");
+            $this->view->showError("Error al Modificar Jugador, verifica que todos los campos esten completos");
         }
     }
 
     function eliminarJugador($id){
         AuthHelper::verify();
         $this->model->borrarJugador($id);
-        header('Location: ' . BASE_URL);
+        header('Location: ' . BASE_URL . '/listarJugadores');
     }
 
 }

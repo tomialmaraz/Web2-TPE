@@ -19,7 +19,7 @@ class AuthController {
 
     public function logout() {
         AuthHelper::logout();
-        header('Location: ' . BASE_URL);    
+        header('Location: ' . BASE_URL . '/login');    
     }
 
     function authenticate(){
@@ -32,7 +32,7 @@ class AuthController {
             //agarro al usuario entero y verifico si existe y si coincide la contraseña
             if($user && password_verify($password, $user->password)){
                 AuthHelper::login($user);
-                header('Location: ' . BASE_URL . '/listarJugadores');
+                header('Location: ' . BASE_URL . '/home');
             } 
             else{
                 $this->view->showLogin('Datos incorrectos');

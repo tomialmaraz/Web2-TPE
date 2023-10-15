@@ -15,7 +15,7 @@ class JugadorView {
     }
 
     public function showError($error) {
-        require 'templates/error.phtml';
+        require 'templates/Error.phtml';
     }
 
     public function showMensaje($mensaje) {

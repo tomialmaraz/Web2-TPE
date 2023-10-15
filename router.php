@@ -2,10 +2,11 @@
 require_once './app/controllers/AuthController.php';
 require_once './app/controllers/JugadorController.php';
 require_once './app/controllers/ClubController.php';
+require_once './app/controllers/HomeController.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
-$action = 'listarJugadores'; // accion por defecto
+$action = 'home'; // accion por defecto
 if (!empty( $_GET['action'])) {
     $action = $_GET['action'];
 }
@@ -28,6 +29,10 @@ if (!empty( $_GET['action'])) {
 $params = explode('/', $action);
 
 switch ($params[0]) {
+    case 'home':
+        $controller = new HomeController();
+        $controller->showHome();
+        break;
     case 'listarJugadores':
         $controller = new JugadorController();
         $controller->showJugadores();
