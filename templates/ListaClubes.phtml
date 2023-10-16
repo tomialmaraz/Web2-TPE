@@ -1,7 +1,6 @@
-<?php require 'templates/Header.phtml' ?>
-
 <h1>A RE FEO LOS CLUBES BO</h1>
 <ul>
+  <!-- este $club existe solo dentro de "foreach" porque quiero usar otra "$club" en este template -->
   <?php foreach ($clubes as $club) { ?>
     <li class="list-group-item">
       <div class="row">
@@ -9,15 +8,15 @@
           <!-- solo deje el h4 para que haga inter espaciado hay q meterle un poco de estilo a esto -->
           <h4> <a href="club/<?= $club->id_club ?>" class="btn btn-primary"><?= $club->nombre ?></a></h4>
         </div>
+        <?php if(isset($_SESSION['USER_ID'])) : ?>
         <div class="col-md-6 text-md-end">
           <div class="d-flex justify-content-end align-items-end">
-           
-            <a href="eliminarClub/<?= $club->id_club ?>" type="button" class="btn btn-danger ms-2">Eliminar Club</a>
+            <a href="formModificarClub/<?= $club->id_club ?>" class="btn btn-primary ms-2">Modificar</a>
+            <a href="solicitudEliminarClub/<?= $club->id_club ?>" type="button" class="btn btn-danger ms-2">Eliminar Club</a>
           </div>
         </div>
+        <?php endif ?>
       </div>
     </li>
-  <?php } ?>
-</ul>
-<?php require_once 'templates/AgregarClub.phtml';?>
-<?php require 'templates/Footer.phtml' ?>
+    <?php } ?>
+  </ul>

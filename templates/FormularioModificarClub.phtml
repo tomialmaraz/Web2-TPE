@@ -1,0 +1,35 @@
+<?php require 'templates/Header.phtml' ?>
+
+<form class="row g-3 d-flex justify-content-between align-items-end" method="POST" action="modificarClub/<?= $club->id_club ?>">
+  <div class="col-md-2 text-center">
+    <h3 class="form-label">Nombre</h3>
+    <h4 class="form-control" id="nombre"><?= $club->nombre ?></h4>
+    <input type="text" class="form-control" name="nombre">
+  </div>
+  <div class="col-md-1 text-center">
+    <h3 class="form-label">Fecha de creación</h3>
+    <h4 class="form-control" id="fecha_creacion"><?= $club->fecha_creacion ?></h4>
+    <input type="date" class="form-control" name="fecha_creacion">
+  </div>
+  <div class="col-md-2 text-center">
+    <h3 class="form-label">Ubicación</h3>
+    <h4 class="form-control" id="ubicacion"><?= $club->ubicacion ?></h4>
+    <input type="text" class="form-control" name="ubicacion">
+  </div>
+  <div class="col-md-2 text-center">
+    <h3 class="form-label">Estadio</h3>
+    <h4 class="form-control h4-custom" id="estadio"><?= $club->estadio ?></h4>
+    <input type="text" class="form-control" name="estadio">
+  </div>
+  <div class="col-md-2 text-center">
+    <h3 class="form-label">Campeonatos locales alcanzados</h3>
+    <h4 class="form-select" id="campeonatos_locales"><?= $club->campeonatos_locales ?></h4>
+    <input type="number" class="form-control" name="campeonatos_locales">
+  </div>
+  <div class="col-md-2">
+    <button type="submit" class="btn btn-primary">Modificar</button>
+  </div>
+</form>
+<a href="listarClubes" class="btn btn-primary mt-3">Volver a la Lista</a>   
+
+<?php require 'templates/Footer.phtml' ?>

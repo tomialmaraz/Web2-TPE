@@ -62,7 +62,7 @@ class JugadorController {
                 $this->view->showError("Error al insertar jugador");
             }
         }
-        else{
+        else {
             $this->view->showError("Error al Insertar Jugador, todos los campos deben estar completos");
         }
     }

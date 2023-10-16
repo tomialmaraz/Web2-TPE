@@ -17,6 +17,7 @@ class ClubModel {
         $clubes = $query->fetchAll(PDO::FETCH_OBJ);
         return $clubes;
     }
+
     function getClubById($id){
         $query = $this->dataBase->prepare('SELECT * FROM clubes WHERE id_club = ?');
         $query->execute([$id]);
@@ -25,14 +26,31 @@ class ClubModel {
         return $club;
     }
 
+    function getJugadoresIdByClubId($id){
+        $query = $this->dataBase->prepare('SELECT id_jugador FROM jugadores WHERE id_club = ?');
+        $query->execute([$id]);
+
+        $jugadoresId = $query->fetch(PDO::FETCH_OBJ);
+        return $jugadoresId;
+    }
+
     function insertClub($nombre, $fecha_creacion, $ubicacion, $estadio, $campeonatos_locales) {
         $query = $this->dataBase->prepare('INSERT INTO clubes (nombre, fecha_creacion, ubicacion, estadio, campeonatos_locales) VALUES(?,?,?,?,?)');
         $query->execute([$nombre, $fecha_creacion, $ubicacion, $estadio, $campeonatos_locales]);
-                            // y esta funcion??? supongo que retorna el ultimo id_club que tenga la tabla o el siguente del ultimo? ni idea
+        //si esta funcion retorna el id_club del ultimo club agregado a la tabla
+        // mientras la tabla no este vacia, siempre va retornar algo... incluso si el insert falla
         return $this->dataBase->lastInsertId();
     }
 
+    function modificarClub($id, $nombre, $fecha_creacion, $estadio, $campeonatos_locales){
+        $query = $this->dataBase->prepare('UPDATE clubes SET nombre = ?, fecha_creacion = ?, estadio = ?, campeonatos_locales = ? WHERE id_club = ?');
+        $query->execute([$nombre, $fecha_creacion, $estadio, $campeonatos_locales, $id]);
+    }
+
+/* esta mal que vacie club y lo elimine en la misma funcion model, hay que desglosarlo? */
     function borrarClubById($id){
+        $query = $this->dataBase->prepare('DELETE FROM jugadores WHERE id_club = ?');
+        $query->execute([$id]);
         $query = $this->dataBase->prepare('DELETE FROM clubes WHERE id_club = ?');
         $query->execute([$id]);
     }
