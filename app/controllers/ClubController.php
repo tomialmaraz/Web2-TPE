@@ -93,7 +93,9 @@ class ClubController {
     function eliminarClub($id) {
         AuthHelper::verify();
         $copiaClub=$this->model->getClubById($id);
+        $this->jugadorModel->borrarJugadoresByIdClub($id);
         $this->model->borrarClubById($id);
+
         $clubEliminado=$this->model->getClubById($id);
         if (empty($clubEliminado)) {
             $this->showClubes(3, $copiaClub);

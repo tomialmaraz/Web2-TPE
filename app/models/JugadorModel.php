@@ -45,10 +45,10 @@ class JugadorModel extends Model{
         $query->execute([$id]);
     }
     
-        function borrarJugadoresByIdClub($id){
-            $query = $this->dataBase->prepare('DELETE FROM jugadores WHERE id_club = ?');
-            $query->execute([$id]);
-        }
+    function borrarJugadoresByIdClub($id){
+        $query = $this->dataBase->prepare('DELETE FROM jugadores WHERE id_club = ?');
+        $query->execute([$id]);
+    }
     
     function getJugadoresByClubId($id){
         $query = $this->dataBase->prepare('SELECT jugadores.* FROM jugadores WHERE id_club = ?');
