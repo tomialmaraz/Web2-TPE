@@ -2,6 +2,6 @@
 
 class AuthView {
     function showLogin($error = null) {
-        require './templates/Login.phtml';
+        require_once './templates/Login.phtml';
     }
 }

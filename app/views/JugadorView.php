@@ -15,11 +15,11 @@ class JugadorView {
     }
 
     public function showError($error) {
-        require 'templates/Error.phtml';
+        require_once 'templates/Error.phtml';
     }
 
     public function showMensaje($mensaje) {
-        require 'templates/MensajeCorrecto.phtml';
+        require_once 'templates/MensajeCorrecto.phtml';
     }
 
 }
