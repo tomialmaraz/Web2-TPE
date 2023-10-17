@@ -1,21 +1,21 @@
-<h1>A RE FEO LOS CLUBES BO</h1>
-<ul>
-  <!-- este $club existe solo dentro de "foreach" porque quiero usar otra "$club" en este template -->
+<h1 class="display-5 text-center">Clubes de la Asociación de Fútbol Argentino</h1>
+<ul class="list-group">
   <?php foreach ($clubes as $club) { ?>
     <li class="list-group-item">
       <div class="row">
         <div class="col-md-6">
-          <!-- solo deje el h4 para que haga inter espaciado hay q meterle un poco de estilo a esto -->
-          <h4> <a href="club/<?= $club->id_club ?>" class="btn btn-primary"><?= $club->nombre ?></a></h4>
+          <h4><?= $club->nombre ?></h4>
         </div>
-        <?php if(isset($_SESSION['USER_ID'])) : ?>
         <div class="col-md-6 text-md-end">
-          <div class="d-flex justify-content-end align-items-end">
+          <div class="d-flex justify-content-end align-items-center mt-2 mb-3">
+          <a href="club/<?= $club->id_club ?>" class="btn btn-secondary ms-2">Ver Detalles</a>
+          <?php if(isset($_SESSION['USER_ID'])) : ?>
             <a href="formModificarClub/<?= $club->id_club ?>" class="btn btn-primary ms-2">Modificar</a>
             <a href="solicitudEliminarClub/<?= $club->id_club ?>" type="button" class="btn btn-danger ms-2">Eliminar Club</a>
+          <?php endif ?>
           </div>
         </div>
-        <?php endif ?>
+        
       </div>
     </li>
     <?php } ?>

@@ -32,7 +32,7 @@ class AuthController {
             //agarro al usuario entero y verifico si existe y si coincide la contraseña
             if($user && password_verify($password, $user->password)){
                 AuthHelper::login($user);
-                header('Location: ' . BASE_URL . '/home');
+                header('Location: ' . BASE_URL);
             } 
             else{
                 $this->view->showLogin('Datos incorrectos');

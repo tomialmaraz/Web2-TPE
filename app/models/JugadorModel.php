@@ -1,15 +1,10 @@
 <?php
 
-require_once './config.php';
+require_once './app/models/Model.php';
 
-class JugadorModel {
-    private $dataBase;
+class JugadorModel extends Model{
 
-    function __construct(){
-        $this->dataBase = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8", DB_USER, DB_PASSWORD);
-    }
-
-    function getJugadoresClubes(){
+    function getJugadoresConNombreDeClub(){
         $query = $this->dataBase->prepare('SELECT jugadores.*, clubes.nombre AS nombre_club FROM jugadores INNER JOIN clubes ON jugadores.id_club = clubes.id_club');
         $query->execute();
 
@@ -41,5 +36,15 @@ class JugadorModel {
         $query = $this->dataBase->prepare('DELETE FROM jugadores WHERE id_jugador = ?');
         $query->execute([$id]);
     }
+
+    function getJugadoresIdByClubId($id){
+        $query = $this->dataBase->prepare('SELECT id_jugador FROM jugadores WHERE id_club = ?');
+        $query->execute([$id]);
+
+        $jugadoresId = $query->fetch(PDO::FETCH_OBJ);
+        return $jugadoresId;
+    }
+
+
 
 }

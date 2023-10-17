@@ -1,7 +1,7 @@
 <?php require 'templates/Header.phtml' ?>
 
 <h1 class="display-5 text-center">Jugadores de la Asociación de Fútbol Argentino</h1>
-<ul class="list-group" id="list_jugadores">
+<ul class="list-group">
   <?php foreach ($jugadores as $jugador) { ?>
     <li class="list-group-item">
       <div class="row">
@@ -10,7 +10,7 @@
           <p>Club: <?= $jugador->nombre_club ?></p>
         </div>
         <div class="col-md-6 text-md-end">
-          <div class="d-flex justify-content-end align-items-end">
+          <div class="d-flex justify-content-end align-items-end mt-3 mb-3">
             <a href="jugador/<?= $jugador->id_jugador ?>" class="btn btn-secondary">Ver Detalles</a>
             <?php if (isset($_SESSION['USER_ID'])) : ?>
               <a href="formModificarJugador/<?= $jugador->id_jugador ?>" class="btn btn-primary ms-2">Modificar</a>
@@ -25,8 +25,8 @@
 
 <?php if(isset($_SESSION['USER_ID'])) : ?>
 <h3 class="mb-3">Agregar Nuevo Jugador</h3>
-<?php require_once 'templates/FormularioAgregar.phtml';
+<?php require_once 'templates/FormularioAgregarJugador.phtml';
 else:?>
 <h4 class="mb-3">Para modificar, agregar, o eliminar jugadores, debe estar Logeado</h4>
-<?php require 'templates/Footer.phtml';
-endif ?>  
+<?php endif ?>
+<?php require_once 'templates/Footer.phtml'; ?>

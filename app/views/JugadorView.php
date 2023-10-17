@@ -11,7 +11,7 @@ class JugadorView {
     }
 
     function showJugadorAModificar($jugador, $clubes){
-        require_once './templates/FormularioModificar.phtml';
+        require_once './templates/FormularioModificarJugador.phtml';
     }
 
     public function showError($error) {

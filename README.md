@@ -5,6 +5,12 @@ Integrantes:
 Almaraz Tomás Esteban -> almaraztomas133@gmail.com
 López Elias -> elias_tandil@hotmail.com
 
+Miembro A ->encargado de jugadores y login
+Tomás Almaraz
+aclaracion: el agregar jugador se encuentra abajo de la lista de jugadores
+Miembro B -> encargado de clubes y logout
+Elias López
+
 Tematica del TPE:
 Pagina de Futbol Argentino.
 

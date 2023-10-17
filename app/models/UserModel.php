@@ -1,13 +1,8 @@
 <?php
 
-require_once './config.php';
+require_once './app/models/Model.php';
 
-class UserModel {
-    private $dataBase;
-
-    function __construct(){
-        $this->dataBase = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8", DB_USER, DB_PASSWORD);
-    }
+class UserModel extends Model{
 
     function getUserByUsername($username){
         $query = $this->dataBase->prepare('SELECT * FROM users WHERE username = ?');

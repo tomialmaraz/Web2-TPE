@@ -20,7 +20,7 @@ class JugadorController {
 
     function showJugadores(){
         //obtengo jugadores
-        $jugadores = $this->model->getJugadoresClubes();
+        $jugadores = $this->model->getJugadoresConNombreDeClub();
         
         $clubes = $this->clubModel->getClubes();
         //obtengo los clubes y se lo mando a la vista porque cuando muestra los jugadores

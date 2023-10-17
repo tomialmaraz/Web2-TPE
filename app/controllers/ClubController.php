@@ -7,6 +7,7 @@ require_once './app/helpers/AuthHelper.php';
 class ClubController {
 
     private $model;
+    private $jugadorModel;
     private $view;
 
     function __construct() {
@@ -14,6 +15,7 @@ class ClubController {
 
         $this->view = new ClubView();
         $this->model = new ClubModel();
+        $this->jugadorModel = new JugadorModel();
     }
     //puedo meterle otro parametro más, con el nombre del club eliminado aca
     //asi cuando te confirma te dice que club fue eliminado en el texto, pero creo que es sebarme
@@ -95,7 +97,7 @@ class ClubController {
 
     function solicitudEliminarClub($id) {
         AuthHelper::verify();
-        $JugadoresIdClub=$this->model->getJugadoresIdByClubId($id);
+        $JugadoresIdClub=$this->jugadorModel->getJugadoresIdByClubId($id);
         if (empty($JugadoresIdClub)) {
             $this->eliminarClub($id);
         } else {

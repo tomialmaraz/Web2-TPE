@@ -1,14 +1,9 @@
 <?php
 //si las "define" son variables constantes y globales, para que las incluyo? 
 //deberian ser accesibles por todos los archivos del programa
-require_once './config.php';
+require_once './app/models/Model.php';
 //deberiamos crear una class padre "Model"?
-class ClubModel {
-    private $dataBase;
-
-    function __construct(){
-        $this->dataBase = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8", DB_USER, DB_PASSWORD);
-    }
+class ClubModel extends Model{
  
     function getClubes(){
         $query = $this->dataBase->prepare('SELECT * FROM clubes');
@@ -24,14 +19,6 @@ class ClubModel {
 
         $club = $query->fetch(PDO::FETCH_OBJ);
         return $club;
-    }
-
-    function getJugadoresIdByClubId($id){
-        $query = $this->dataBase->prepare('SELECT id_jugador FROM jugadores WHERE id_club = ?');
-        $query->execute([$id]);
-
-        $jugadoresId = $query->fetch(PDO::FETCH_OBJ);
-        return $jugadoresId;
     }
 
     function insertClub($nombre, $fecha_creacion, $ubicacion, $estadio, $campeonatos_locales) {
