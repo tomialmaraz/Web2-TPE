@@ -29,7 +29,7 @@ class ClubController {
         $club = $this->model->getClubById($id);
         if(!empty($club)){
             $jugadores=$this->jugadorModel->getJugadoresConNombreDeClubById($id);
-            $this->view->showClub($club, $jugadores,0);
+            $this->view->showClub($club, $jugadores, $case);
         } else { 
             $this->view->showError('404: No se pudo acceder a los datos del club solicitado. Aún no se encuentran cargados o fueron eliminados');
         }
@@ -49,7 +49,8 @@ class ClubController {
         } 
         $id = $this->model->insertClub($nombre, $fecha_creacion, $ubicacion, $estadio, $campeonatos_locales);
         if ($id) {
-            $this->showClubes(1);
+            $club=$this->model->getClubById($id);
+            $this->showClubes(1, $club);
         } else {
             $this->view->showError("Error, la carga del club ha fallado");
         }
@@ -74,7 +75,7 @@ class ClubController {
             $this->showClubById($id, 1);
         }
         else{
-            $this->view->showError("Error al modificar el club, verifica que todos los campos esten completos");
+            $this->view->showError("Error, para modificar el club, verifica que todos los campos esten completos");
         }
     }
 
