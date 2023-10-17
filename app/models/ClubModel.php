@@ -26,9 +26,9 @@ class ClubModel extends Model{
         return $this->dataBase->lastInsertId();
     }
 
-    function modificarClub($id, $nombre, $fecha_creacion, $estadio, $campeonatos_locales){
-        $query = $this->dataBase->prepare('UPDATE clubes SET nombre = ?, fecha_creacion = ?, estadio = ?, campeonatos_locales = ? WHERE id_club = ?');
-        $query->execute([$nombre, $fecha_creacion, $estadio, $campeonatos_locales, $id]);
+    function modificarClub($id, $nombre, $fecha_creacion, $ubicacion, $estadio, $campeonatos_locales){
+        $query = $this->dataBase->prepare('UPDATE clubes SET nombre = ?, fecha_creacion = ?, ubicacion = ?, estadio = ?, campeonatos_locales = ? WHERE id_club = ?');
+        $query->execute([$nombre, $fecha_creacion, $ubicacion, $estadio, $campeonatos_locales, $id]);
     }
 
     function borrarClubById($id){

@@ -64,14 +64,15 @@ class ClubController {
 
     function modificarClub($id){
         AuthHelper::verify();
-        if(isset($_POST['nombre']) && isset($_POST['fecha_creacion']) && isset($_POST['estadio']) && isset($_POST['campeonatos_locales'])&&
-          !empty($_POST['nombre']) && !empty($_POST['fecha_creacion']) && !empty($_POST['estadio']) && !empty($_POST['campeonatos_locales'])){
+        if(isset($_POST['nombre']) && isset($_POST['fecha_creacion']) && isset($_POST['ubicacion']) && isset($_POST['estadio']) && isset($_POST['campeonatos_locales'])&&
+          !empty($_POST['nombre']) && !empty($_POST['fecha_creacion']) && !empty($_POST['ubicacion']) && !empty($_POST['estadio']) && !empty($_POST['campeonatos_locales'])){
             $nombre = $_POST['nombre'];
             $fecha_creacion = $_POST['fecha_creacion'];
+            $ubicacion = $_POST['ubicacion'];
             $estadio = $_POST['estadio'];
             $campeonatos_locales = $_POST ['campeonatos_locales'];
 
-            $this->model->modificarClub($id, $nombre, $fecha_creacion, $estadio, $campeonatos_locales);
+            $this->model->modificarClub($id, $nombre, $fecha_creacion, $ubicacion, $estadio, $campeonatos_locales);
             $this->showClubById($id, 1);
         }
         else{
