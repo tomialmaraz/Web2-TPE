@@ -12,7 +12,7 @@ class JugadorModel extends Model{
         return $jugadores;
     }
 
-    function getJugadoresConNombreDeClubById($id){
+    function getJugadoresConNombreDeClubByClubId($id){
         $query = $this->dataBase->prepare('SELECT jugadores.*, clubes.nombre AS nombre_club FROM jugadores INNER JOIN clubes ON jugadores.id_club = clubes.id_club WHERE jugadores.id_club = ?');
         $query->execute([$id]);
 

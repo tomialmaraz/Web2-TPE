@@ -28,7 +28,7 @@ class ClubController {
     function showClubById($id, $case=0) {
         $club = $this->model->getClubById($id);
         if(!empty($club)){
-            $jugadores=$this->jugadorModel->getJugadoresConNombreDeClubById($id);
+            $jugadores=$this->jugadorModel->getJugadoresConNombreDeClubByClubId($id);
             $this->view->showClub($club, $jugadores, $case);
         } else { 
             $this->view->showError('404: No se pudo acceder a los datos del club solicitado. Aún no se encuentran cargados o fueron eliminados');
