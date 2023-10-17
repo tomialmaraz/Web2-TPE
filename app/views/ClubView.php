@@ -40,7 +40,7 @@ class ClubView {
         }
     }
 
-    function showClub($club, $posMsj=0){
+    function showClub($club, $jugadores, $posMsj=0){
         switch ($posMsj) {
             case '0':
                 require_once './templates/Header.phtml';  

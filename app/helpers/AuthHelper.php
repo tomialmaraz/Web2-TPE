@@ -3,7 +3,6 @@
 class AuthHelper{
 
     public static function initialize() {
-        // como se lee esto?
         if (session_status() != PHP_SESSION_ACTIVE) {
             session_start();
         }

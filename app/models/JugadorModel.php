@@ -12,6 +12,14 @@ class JugadorModel extends Model{
         return $jugadores;
     }
 
+    function getJugadoresConNombreDeClubById($id){
+        $query = $this->dataBase->prepare('SELECT jugadores.*, clubes.nombre AS nombre_club FROM jugadores INNER JOIN clubes ON jugadores.id_club = clubes.id_club WHERE jugadores.id_club = ?');
+        $query->execute([$id]);
+
+        $jugadores = $query->fetchAll(PDO::FETCH_OBJ);
+        return $jugadores;
+    }
+
     function getJugadorById($id){
         $query = $this->dataBase->prepare('SELECT jugadores.*, clubes.nombre AS nombre_club FROM jugadores INNER JOIN clubes ON jugadores.id_club = clubes.id_club WHERE id_jugador = ?');
         $query->execute([$id]);
@@ -36,15 +44,18 @@ class JugadorModel extends Model{
         $query = $this->dataBase->prepare('DELETE FROM jugadores WHERE id_jugador = ?');
         $query->execute([$id]);
     }
-
-    function getJugadoresIdByClubId($id){
-        $query = $this->dataBase->prepare('SELECT id_jugador FROM jugadores WHERE id_club = ?');
+    
+        function borrarJugadoresByIdClub($id){
+            $query = $this->dataBase->prepare('DELETE FROM jugadores WHERE id_club = ?');
+            $query->execute([$id]);
+        }
+    
+    function getJugadoresByClubId($id){
+        $query = $this->dataBase->prepare('SELECT jugadores.* FROM jugadores WHERE id_club = ?');
         $query->execute([$id]);
 
-        $jugadoresId = $query->fetch(PDO::FETCH_OBJ);
-        return $jugadoresId;
+        $jugadores = $query->fetch(PDO::FETCH_OBJ);
+        return $jugadores;
     }
-
-
 
 }

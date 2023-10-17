@@ -6,7 +6,7 @@ require_once './app/controllers/HomeController.php';
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
-$action = 'home'; // accion por defecto
+$action = 'home';
 if (!empty( $_GET['action'])) {
     $action = $_GET['action'];
 }
@@ -26,10 +26,6 @@ if (!empty( $_GET['action'])) {
 // (eliminar un club)               eliminarClub/id_club        ->    ClubController->solicitudEliminarClub($id);
 // (iniciar una sesion)             login                       ->    authContoller->showLogin();
 // (cerrar la sesion actual)        logout                      ->    authContoller->logout();
-
-//esto no va el router? no lo hace el controller?
-// auth                          ->    authContoller->auth(); // toma los datos del post y autentica al usuario
-
 
 $params = explode('/', $action);
 
@@ -98,7 +94,6 @@ switch ($params[0]) {
         $controller = new AuthController();
         $controller->logout();
         break;
-        // quien llama a esto?
     case 'auth':
         $controller = new AuthController();
         $controller->authenticate();
