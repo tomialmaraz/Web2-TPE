@@ -81,7 +81,7 @@ class ClubController {
 
     function solicitudEliminarClub($id) {
         AuthHelper::verify();
-        $jugadoresClubId=$this->jugadorModel->getJugadoresByClubId($id);
+        $jugadoresClubId=$this->jugadorModel->getJugadoresConNombreDeClubByClubId($id);
         if (empty($jugadoresClubId)) {
             $this->eliminarClub($id);
         } else {
