@@ -1,179 +1,105 @@
 <?php
-    require_once './config.php';
-    class Model {
-        protected $dataBase;
+require_once './config.php';
 
-        function __construct() {
-            $this->dataBase = new PDO('mysql:host='. DB_HOST .';dbname='. DB_NAME .';charset=utf8', DB_USER, DB_PASSWORD);
-            $this->deploy();
+class Model {
+    protected $dataBase;
+
+    function __construct() {
+        $this->dataBase = new PDO('mysql:host='. DB_HOST .';charset=utf8', DB_USER, DB_PASSWORD);
+        $this->deploy();
+    }
+
+    function deploy() {
+        // Verificar si la base de datos "tpe_web2" existe
+        $query = $this->dataBase->query('SHOW DATABASES LIKE "tpe_web2"');
+        $databaseExists = $query->rowCount() > 0;
+
+        if (!$databaseExists) {
+            // Si la base de datos no existe, créala
+            $this->dataBase->exec('CREATE DATABASE tpe_web2');
         }
 
-        function deploy() {
-            // Chequear si hay tablas
-            $query = $this->dataBase->query('SHOW TABLES');
-            $tables = $query->fetchAll(); // Nos devuelve todas las tablas de la db
-            if(count($tables)==0) {
-                // Si no hay crearlas
-                $password = 'admin';
-                $password_hasheada = password_hash($password, PASSWORD_DEFAULT);
-                $sql =<<<END
-                -- phpMyAdmin SQL Dump
-                -- version 5.2.1
-                -- https://www.phpmyadmin.net/
-                --
-                -- Servidor: 127.0.0.1
-                -- Tiempo de generación: 16-10-2023 a las 22:32:44
-                -- Versión del servidor: 10.4.20-MariaDB
-                -- Versión de PHP: 8.0.8
+        // Seleccionar la base de datos "tpe_web2"
+        $this->dataBase->exec('USE tpe_web2');
 
-                SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-                START TRANSACTION;
-                SET time_zone = "+00:00";
+        // A continuación, puedes agregar la creación de tablas y la inserción de datos para las tablas que necesites en la base de datos "tpe_web2".
 
+        // Creación de la tabla "usuarios" (sin restricciones de clave externa)
+        $this->dataBase->exec('
+            CREATE TABLE IF NOT EXISTS `users` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `userName` varchar(50) NOT NULL,
+                `password` varchar(255) NOT NULL,
+                PRIMARY KEY (`id`)
+            )
+        ');
 
-                /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-                /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-                /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-                /*!40101 SET NAMES utf8mb4 */;
+        // Insertar datos en la tabla "usuarios" solo si no existen registros
+        $query = $this->dataBase->query('SELECT * FROM `users`');
+        if ($query->rowCount() == 0) {
+            $password = 'admin'; // Cambia esto por la contraseña deseada
+            $passwordEncriptada = password_hash($password, PASSWORD_DEFAULT);
+            $this->dataBase->exec('
+                INSERT INTO `users` (`userName`, `password`) VALUES
+                ("webadmin", "' . $passwordEncriptada . '")
+            ');
+        }
 
-                --
-                -- Base de datos: `tpe_web2`
-                --
-
-                -- --------------------------------------------------------
-
-                --
-                -- Estructura de tabla para la tabla `clubes`
-                --
-
-                CREATE TABLE `clubes` (
-                `id_club` int(11) NOT NULL,
+        // Ejemplo de creación de la tabla "clubes"
+        $this->dataBase->exec('
+            CREATE TABLE IF NOT EXISTS `clubes` (
+                `id_club` int(11) NOT NULL AUTO_INCREMENT,
                 `nombre` varchar(45) NOT NULL,
                 `fecha_creacion` date NOT NULL,
                 `ubicacion` varchar(45) NOT NULL,
                 `estadio` varchar(45) NOT NULL,
-                `campeonatos_locales` int(11) NOT NULL
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+                `campeonatos_locales` int(11) NOT NULL,
+                PRIMARY KEY (`id_club`)
+            )
+        ');
 
-                --
-                -- Volcado de datos para la tabla `clubes`
-                --
+        // Insertar datos en la tabla "clubes" solo si no existen registros
+        $query = $this->dataBase->query('SELECT * FROM `clubes`');
+        if ($query->rowCount() == 0) {
+            $this->dataBase->exec('
+                INSERT INTO `clubes` (`nombre`, `fecha_creacion`, `ubicacion`, `estadio`, `campeonatos_locales`) VALUES
+                ("Boca Juniors", "1905-04-03", "Buenos Aires", "La Bombonera", 35),
+                ("River Plate", "1901-05-25", "Buenos Aires", "El Monumental", 38),
+                ("Velez", "1910-01-01", "Buenos Aires", "José Amalfitani", 9)
+            ');
+        }
 
-                INSERT INTO `clubes` (`id_club`, `nombre`, `fecha_creacion`, `ubicacion`, `estadio`, `campeonatos_locales`) VALUES
-                (1, 'Boca Juniors', '1905-04-03', 'Buenos Aires', 'La Bombonera', 35),
-                (2, 'River Plate', '1901-05-25', 'Buenos Aires', 'El Monumental', 38),
-                (3, 'Velez', '1910-01-01', 'Buenos Aires', 'José Amalfitani', 9);
+        // Añade más tablas y datos según sea necesario siguiendo el mismo patrón.
 
-                -- --------------------------------------------------------
-
-                --
-                -- Estructura de tabla para la tabla `jugadores`
-                --
-
-                CREATE TABLE `jugadores` (
-                `id_jugador` int(11) NOT NULL,
+        // Ejemplo de creación de la tabla "jugadores"
+        $this->dataBase->exec('
+            CREATE TABLE IF NOT EXISTS `jugadores` (
+                `id_jugador` int(11) NOT NULL AUTO_INCREMENT,
                 `nombre` varchar(45) NOT NULL,
                 `edad` int(11) NOT NULL,
                 `nacionalidad` varchar(45) NOT NULL,
                 `posicion` varchar(45) NOT NULL,
                 `pie_habil` varchar(45) NOT NULL,
-                `id_club` int(11) NOT NULL
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+                `id_club` int(11) NOT NULL,
+                PRIMARY KEY (`id_jugador`),
+                KEY `id_club` (`id_club`),
+                CONSTRAINT `jugadores_ibfk_1` FOREIGN KEY (`id_club`) REFERENCES `clubes` (`id_club`)
+            )
+        ');
 
-                --
-                -- Volcado de datos para la tabla `jugadores`
-                --
-
-                INSERT INTO `jugadores` (`id_jugador`, `nombre`, `edad`, `nacionalidad`, `posicion`, `pie_habil`, `id_club`) VALUES
-                (1, 'Sergio Romero', 36, 'Argentina', 'arquero', 'derecho', 1),
-                (2, 'Marcelo Saracchi', 25, 'Uruguay', 'Defensor', 'Diestro', 1),
-                (3, 'Leonardo Fabian Burian', 39, 'Uruguay', 'Arquero', 'Diestro', 3),
-                (4, 'Braian Romero', 32, 'Argentina', 'Delantero', 'Diestro', 3),
-                (5, 'Walter Bou', 30, 'Argentina', 'Delantero', 'Diestro', 3),
-                (6, 'Facundo Colidio', 23, 'Argentina', 'Delantero', 'Diestro', 2),
-                (7, 'Matias Suarez', 35, 'Argentina', 'Delantero', 'Diestro', 2);
-
-                -- --------------------------------------------------------
-
-                --
-                -- Estructura de tabla para la tabla `users`
-                --
-
-                CREATE TABLE `users` (
-                `id` int(11) NOT NULL,
-                `username` varchar(50) NOT NULL,
-                `password` varchar(255) NOT NULL
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-                --
-                -- Volcado de datos para la tabla `users`
-                --
-
-                INSERT INTO `users` (`id`, `username`, `password`) VALUES
-                (1, 'webadmin', '$password_hasheada');
-
-                --
-                -- Índices para tablas volcadas
-                --
-
-                --
-                -- Indices de la tabla `clubes`
-                --
-                ALTER TABLE `clubes`
-                ADD PRIMARY KEY (`id_club`);
-
-                --
-                -- Indices de la tabla `jugadores`
-                --
-                ALTER TABLE `jugadores`
-                ADD PRIMARY KEY (`id_jugador`),
-                ADD KEY `id_club` (`id_club`);
-
-                --
-                -- Indices de la tabla `users`
-                --
-                ALTER TABLE `users`
-                ADD PRIMARY KEY (`id`);
-
-                --
-                -- AUTO_INCREMENT de las tablas volcadas
-                --
-
-                --
-                -- AUTO_INCREMENT de la tabla `clubes`
-                --
-                ALTER TABLE `clubes`
-                MODIFY `id_club` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
-                --
-                -- AUTO_INCREMENT de la tabla `jugadores`
-                --
-                ALTER TABLE `jugadores`
-                MODIFY `id_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
-
-                --
-                -- AUTO_INCREMENT de la tabla `users`
-                --
-                ALTER TABLE `users`
-                MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
-                --
-                -- Restricciones para tablas volcadas
-                --
-
-                --
-                -- Filtros para la tabla `jugadores`
-                --
-                ALTER TABLE `jugadores`
-                ADD CONSTRAINT `jugadores_ibfk_1` FOREIGN KEY (`id_club`) REFERENCES `clubes` (`id_club`);
-                COMMIT;
-
-                /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-                /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-                /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-                END;
-                $this->dataBase->query($sql);
-            }
-            
+        // Insertar datos en la tabla "jugadores" solo si no existen registros
+        $query = $this->dataBase->query('SELECT * FROM `jugadores`');
+        if ($query->rowCount() == 0) {
+            $this->dataBase->exec('
+                INSERT INTO `jugadores` (`nombre`, `edad`, `nacionalidad`, `posicion`, `pie_habil`, `id_club`) VALUES
+                ("Sergio Romero", 36, "Argentina", "arquero", "derecho", 1),
+                ("Marcelo Saracchi", 25, "Uruguay", "Defensor", "Diestro", 1),
+                ("Leonardo Fabian Burian", 39, "Uruguay", "Arquero", "Diestro", 3),
+                ("Braian Romero", 32, "Argentina", "Delantero", "Diestro", 3),
+                ("Walter Bou", 30, "Argentina", "Delantero", "Diestro", 3),
+                ("Facundo Colidio", 23, "Argentina", "Delantero", "Diestro", 2),
+                ("Matias Suarez", 35, "Argentina", "Delantero", "Diestro", 2)
+            ');
         }
     }
+}
