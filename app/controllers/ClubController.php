@@ -17,19 +17,19 @@ class ClubController {
         $this->jugadorModel = new JugadorModel();
     }
 
-    function showClubes($case=0, $clubNew=null) {
+    function showClubes($llamadoDesde=null, $idClubAEliminar=null) {
         $clubes = $this->model->getClubes();
         if(!empty($clubes))
-            $this->view->showClubes($clubes, $case, $clubNew);
+            $this->view->showClubes($clubes, $llamadoDesde, $idClubAEliminar);
         else 
             $this->view->showError('404: No se pudo acceder a los datos. Es posible que de momento no existan clubes cargados o han fueron eliminados');
     }
     
-    function showClubById($id, $case=0) {
+    function showClubById($id, $llamadoDesde='') {
         $club = $this->model->getClubById($id);
         if(!empty($club)){
             $jugadores=$this->jugadorModel->getJugadoresConNombreDeClubByClubId($id);
-            $this->view->showClub($club, $jugadores, $case);
+            $this->view->showClub($club, $jugadores, $llamadoDesde);
         } else { 
             $this->view->showError('404: No se pudo acceder a los datos del club solicitado. Aún no se encuentran cargados o fueron eliminados');
         }
@@ -44,15 +44,14 @@ class ClubController {
         $campeonatos_locales = $_POST['campeonatos_locales'];
 
         if (empty($nombre) || empty($fecha_creacion) || empty($ubicacion) || empty($estadio) || empty($campeonatos_locales)) {
-            $this->view->showError("Por favor completar todos los campos antes de agregar");
+            $this->view->showError('Por favor completar todos los campos antes de agregar');
             return;
         } 
         $id = $this->model->insertClub($nombre, $fecha_creacion, $ubicacion, $estadio, $campeonatos_locales);
         if ($id) {
-            $club=$this->model->getClubById($id);
-            $this->showClubes(1, $club);
+            header('Location: ' . BASE_URL . "/listarClubes/agregarClub/''");
         } else {
-            $this->view->showError("Error, la carga del club ha fallado");
+            $this->view->showError('Error, la carga del club ha fallado');
         }
     }
 
@@ -73,10 +72,11 @@ class ClubController {
             $campeonatos_locales = $_POST ['campeonatos_locales'];
 
             $this->model->modificarClub($id, $nombre, $fecha_creacion, $ubicacion, $estadio, $campeonatos_locales);
-            $this->showClubById($id, 1);
+            //como verifico si los datos se modificaron correctamente en la db? antes de dar el mensaje de confirmacion
+            header('Location: ' . BASE_URL . "/club/$id/modificarClub");
         }
         else{
-            $this->view->showError("Error, para modificar el club, verifica que todos los campos esten completos");
+            $this->view->showError('Error, para modificar el club, verifica que todos los campos esten completos');
         }
     }
 
@@ -86,8 +86,7 @@ class ClubController {
         if (empty($jugadoresClubId)) {
             $this->eliminarClub($id);
         } else {
-            $club=$this->model->getClubById($id);
-            $this->showClubes(2, $club);
+            header('Location: ' . BASE_URL . "/listarClubes/solicitudEliminarClub/$id");
         }
     }
     
@@ -99,9 +98,9 @@ class ClubController {
 
         $clubEliminado=$this->model->getClubById($id);
         if (empty($clubEliminado)) {
-            $this->showClubes(3, $copiaClub);
+            header('Location: ' . BASE_URL . "/listarClubes/eliminarClub/''");
         } else {
-            $this->view->showError("Error, el club no pudo eliminarse");
+            $this->view->showError('Error, el club no pudo eliminarse');
         }
     } 
 }

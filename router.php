@@ -60,11 +60,11 @@ switch ($params[0]) {
         break; 
     case 'listarClubes':
         $controller = new ClubController();
-        $controller->showClubes();
+        $controller->showClubes($params[1], $params[2]);
         break;
     case 'club':
         $controller = new ClubController();
-        $controller->showClubById($params[1]);
+        $controller->showClubById($params[1], $params[2]);
         break;
     case 'formModificarClub':
         $controller = new ClubController();
@@ -99,6 +99,6 @@ switch ($params[0]) {
         $controller->authenticate();
         break;
     default: 
-        echo "404 Page Not Found";
+        echo '404 Page Not Found';
         break;
 }

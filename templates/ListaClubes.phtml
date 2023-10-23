@@ -1,3 +1,5 @@
+<?php require_once 'templates/header.phtml' ?>
+
 <h1 class="display-5 text-center">Clubes de la Asociación de Fútbol Argentino</h1>
 <ul class="list-group">
   <?php foreach ($clubes as $club) { ?>
@@ -8,15 +10,44 @@
         </div>
         <div class="col-md-6 text-md-end">
           <div class="d-flex justify-content-end align-items-center mt-2 mb-3">
-          <a href="club/<?= $club->id_club ?>" class="btn btn-secondary ms-2">Ver Detalles</a>
-          <?php if(isset($_SESSION['USER_ID'])) : ?>
-            <a href="formModificarClub/<?= $club->id_club ?>" class="btn btn-primary ms-2">Modificar</a>
-            <a href="solicitudEliminarClub/<?= $club->id_club ?>" type="button" class="btn btn-danger ms-2">Eliminar Club</a>
-          <?php endif ?>
+            <a href="club/<?= $club->id_club ?>/''" class="btn btn-secondary ms-2">Ver Detalles</a>
+            <?php if(isset($_SESSION['USER_ID'])) : ?>
+              <a href="formModificarClub/<?= $club->id_club ?>" class="btn btn-primary ms-2">Modificar</a>
+              <a href="solicitudEliminarClub/<?= $club->id_club ?>" type="button" class="btn btn-danger ms-2">Eliminar Club</a>
+            <?php endif ?>
           </div>
         </div>
-        
       </div>
     </li>
-    <?php } ?>
-  </ul>
+  <?php } ?>
+</ul>
+
+<!-- considero que no es necesario el requisito de estar logueado -->
+<?php if ($llamadoDesde=='solicitudEliminarClub') : ?>
+  <div class="col-md-6">
+    <!-- fondo amarillo -->
+    <section class="clubes bg-light p-3">
+        <h2>Advertencia</h2>
+        <p>El club que desea eliminar aún posee jugadores cargados</p>
+          <!-- boton azul -->
+        <a class="btn btn-primary" href="listarClubes/''/''">No eliminar</a>
+          <!-- boton rojo -->
+        <a class="btn btn-primary" href="eliminarClub/<?= $idClubAEliminar ?>">Eliminar este club de todas formas</a>
+    </section>
+  </div>
+<?php endif ?>
+
+<?php if ($llamadoDesde=='agregarClub') : ?>
+  <div class='alert alert-success' role='alert'>
+    <p> El club se agregó correctamente </p>
+  </div> 
+<?php endif ?>
+
+<?php if ($llamadoDesde=='eliminarClub') : ?>
+  <div class='alert alert-success' role='alert'>
+    <p> El club se eliminó correctamente </p>
+  </div> 
+<?php endif ?>
+
+<?php require_once 'templates/FormAgregarClub.phtml';?>
+<?php require_once 'templates/footer.phtml' ?>

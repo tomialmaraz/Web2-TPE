@@ -3,36 +3,30 @@
 <form class="row g-3 d-flex justify-content-between align-items-end" method="POST" action="modificarJugador/<?= $jugador->id_jugador ?>">
   <div class="col-md-2 text-center">
     <h3 class="form-label">Nombre</h3>
-    <h4 class="form-control" id="nombre"><?= $jugador->nombre ?></h4>
-    <input type="text" class="form-control" name="nombre">
+    <input type="text" class="form-control" name="nombre" value='<?= $jugador->nombre ?>'>
   </div>
   <div class="col-md-1 text-center">
     <h3 class="form-label">Edad</h3>
-    <h4 class="form-control" id="nacionalidad"><?= $jugador->edad ?></h4>
-    <input type="number" class="form-control" name="edad">
+    <input type="number" class="form-control" name="edad" value='<?= $jugador->edad ?>'>
   </div>
   <div class="col-md-2 text-center">
     <h3 class="form-label">Nacionalidad</h3>
-    <h4 class="form-control" id="posicion"><?= $jugador->nacionalidad ?></h4>
-    <input type="text" class="form-control" name="nacionalidad">
+    <input type="text" class="form-control" name="nacionalidad" value='<?= $jugador->nacionalidad ?>'>
   </div>
   <div class="col-md-2 text-center">
     <h3 class="form-label">Posicion</h3>
-    <h4 class="form-control h4-custom" id="edad"><?= $jugador->posicion ?></h4>
-    <input type="text" class="form-control" name="posicion">
+    <input type="text" class="form-control" name="posicion" value='<?= $jugador->posicion ?>'>
   </div>
   <div class="col-md-2 text-center">
     <h3 class="form-label">Pie Habil</h3>
-    <h4 class="form-select" id="pie_habil"><?= $jugador->pie_habil ?></h4>
     <select name="pie_habil" class="form-select">
-      <option selected disabled>Seleccionar</option>
+      <option selected disabled>Seleccionar...</option>
       <option value="derecho">Derecho</option>
       <option value="izquierdo">Izquierdo</option>
     </select>
   </div>
   <div class="col-md-2 text-center">
     <h3 class="form-label">Club</h3>
-    <h4 class="form-select" id="club"><?= $jugador->nombre_club ?></h4>
     <select name="id_club" class="form-select">
       <option selected disabled>Seleccionar...</option>
       <?php foreach ($clubes as $club) {?>
