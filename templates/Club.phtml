@@ -13,11 +13,11 @@
         </ul>
     </div>
 </div>
-<?php if ($llamadoDesde=='modificarClub') : ?>
+<?php /*if ($llamadoDesde=='modificarClub') : ?>
   <div class='alert alert-success' role='alert'>
     <p> El club se modificó correctamente </p>
   </div> 
-<?php endif ?>
+<?php endif */?>
 <ul class="list-group">
   <?php foreach ($jugadores as $jugador) { ?>
     <li class="list-group-item">
@@ -28,5 +28,5 @@
     </li>
   <?php } ?>
 </ul>
-
+<a href="listarClubes" class="btn btn-primary mt-3">Volver a la lista</a>
 <?php require_once 'templates/Footer.phtml' ?>

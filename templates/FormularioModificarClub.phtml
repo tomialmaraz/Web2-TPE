@@ -3,28 +3,28 @@
 <form class="row g-3 d-flex justify-content-between align-items-end" method="POST" action="modificarClub/<?= $club->id_club ?>">
   <div class="col-md-2 text-center">
     <h3 class="form-label">Nombre</h3>
-    <input type="text" class="form-control" name="nombre" value='<?= $club->nombre ?>'>
+    <input type="text" class="form-control" name="nombre" value='<?= $club->nombre ?>' required>
   </div>
   <div class="col-md-1 text-center">
     <h3 class="form-label">Fecha de creación</h3>
-    <input type="date" class="form-control" name="fecha_creacion" value='<?= $club->fecha_creacion ?>'>
+    <input type="date" class="form-control" name="fecha_creacion" value='<?= $club->fecha_creacion ?>' required>
   </div>
   <div class="col-md-2 text-center">
     <h3 class="form-label">Ubicación</h3>
-    <input type="text" class="form-control" name="ubicacion" value='<?= $club->ubicacion ?>'>
+    <input type="text" class="form-control" name="ubicacion" value='<?= $club->ubicacion ?>' required>
   </div>
   <div class="col-md-2 text-center">
     <h3 class="form-label">Estadio</h3>
-    <input type="text" class="form-control" name="estadio" value='<?= $club->estadio ?>'>
+    <input type="text" class="form-control" name="estadio" value='<?= $club->estadio ?>' required>
   </div>
   <div class="col-md-2 text-center">
     <h3 class="form-label">Campeonatos locales alcanzados</h3>
-    <input type="number" class="form-control" name="campeonatos_locales" value='<?= $club->campeonatos_locales ?>'>
+    <input type="number" class="form-control" name="campeonatos_locales" value='<?= $club->campeonatos_locales ?>' required>
   </div>
   <div class="col-md-2">
     <button type="submit" class="btn btn-primary">Modificar</button>
   </div>
 </form>
-<a href="listarClubes/''/''" class="btn btn-primary mt-3">Volver a la Lista</a>   
+<a href="listarClubes/modificarClub/<?= $club->id_club ?>" class="btn btn-primary mt-3">Volver a la Lista</a>   
 
 <?php require_once 'templates/Footer.phtml' ?>

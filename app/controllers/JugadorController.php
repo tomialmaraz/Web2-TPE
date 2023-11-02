@@ -21,17 +21,26 @@ class JugadorController {
     function showJugadores(){
         //obtengo jugadores
         $jugadores = $this->model->getJugadoresConNombreDeClub();
-        
         $clubes = $this->clubModel->getClubes();
         //obtengo los clubes y se lo mando a la vista porque cuando muestra los jugadores
         //puede agregar nuevos(si esta logueado) y cuando agrega necesita cada nombre de club
         //para el select del formulario agregar.
-        $this->view->showJugadores($jugadores, $clubes);
+        if(!empty($jugadores)&&!empty($clubes)){
+            $this->view->showJugadores($jugadores, $clubes);
+        } else {
+            $this->view->showError('No se pudo acceder a los datos. Es posible que de momento no 
+                existan jugadores o clubes cargados, o hayan sido eliminados');
+        }
     }
 
     function showJugadorById($id){
         $jugador = $this->model->getJugadorById($id);
+        if(!empty($jugador)){
         $this->view->showJugador($jugador);
+        } else {
+            $this->view->showError('No se pudo acceder a los datos del jugador solicitado.
+                 Aún no se encuentran cargados o fueron eliminados');
+        }
     }
 
     function showJugadorAModificar($id){
@@ -41,7 +50,12 @@ class JugadorController {
         AuthHelper::verify();
         $jugador = $this->model->getJugadorById($id);
         $clubes = $this->clubModel->getClubes();
+        if(!empty($jugador)&&!empty($clubes)){
         $this->view->showJugadorAModificar($jugador, $clubes);
+        } else {
+            $this->view->showError('No se pudo acceder a los datos. Es posible que de momento no 
+                existan jugadores o clubes cargados, o hayan sido eliminados');   
+        }
     }
 
     function agregarJugador(){
@@ -57,7 +71,7 @@ class JugadorController {
 
             $id = $this->model->agregarJugador($nombre, $edad, $nacionalidad, $posicion, $pie_habil, $id_club);
             if ($id) {
-                header('Location: ' . BASE_URL . '/listarJugadores');
+                header('Location: ' . BASE_URL . 'listarJugadores');
             } else {
                 $this->view->showError("Error al insertar jugador");
             }
@@ -80,16 +94,20 @@ class JugadorController {
 
             $this->model->modificarJugador($id, $nombre, $edad, $nacionalidad, $posicion, $pie_habil, $id_club);
             $this->view->showMensaje("Se modifico correctamente");
-        }
-        else{
+        } else {
             $this->view->showError("Error al Modificar Jugador, verifica que todos los campos esten completos");
         }
     }
 
     function eliminarJugador($id){
+    
         AuthHelper::verify();
         $this->model->borrarJugador($id);
-        header('Location: ' . BASE_URL . '/listarJugadores');
+        $jugadorEliminado=$this->model->getJugadorById($id);
+        if (empty($jugadorEliminado)) {
+            header('Location: ' . BASE_URL . 'listarJugadores');
+        } else {
+            $this->view->showError('Error, el jugador no pudo eliminarse');
+        } 
     }
-
 }

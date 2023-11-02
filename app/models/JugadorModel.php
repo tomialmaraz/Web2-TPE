@@ -23,7 +23,6 @@ class JugadorModel extends Model{
     function agregarJugador($nombre, $edad, $nacionalidad, $posicion, $pie_habil, $club_id){
         $query = $this->dataBase->prepare('INSERT INTO jugadores (nombre, edad, nacionalidad, posicion, pie_habil, id_club) VALUES (?,?,?,?,?,?)');
         $query->execute([$nombre, $edad, $nacionalidad, $posicion, $pie_habil, $club_id]);
-        
         return $this->dataBase->lastInsertId();
     }
 

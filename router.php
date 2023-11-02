@@ -60,11 +60,11 @@ switch ($params[0]) {
         break; 
     case 'listarClubes':
         $controller = new ClubController();
-        $controller->showClubes($params[1], $params[2]);
+        $controller->showClubes();
         break;
     case 'club':
         $controller = new ClubController();
-        $controller->showClubById($params[1], $params[2]);
+        $controller->showClubById($params[1]);
         break;
     case 'formModificarClub':
         $controller = new ClubController();

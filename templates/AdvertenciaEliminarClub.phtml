@@ -1,0 +1,12 @@
+<?php require_once 'templates/Header.phtml' ?>
+  <div class="col-md-6">
+    <section class="clubes bg-light p-3">
+        <h2>Advertencia</h2>
+        <p>El club que desea eliminar aún posee jugadores cargados</p>
+        <a class="btn btn-primary" href="listarClubes">No eliminar, devuelveme a la lista</a>
+        <a class="btn btn-primary" href="eliminarClub/<?= $idClubAEliminar ?>">Eliminar este club de todas formas</a>
+    </section>
+  </div>
+<?php require_once 'templates/Footer.phtml' ?>
+
+
